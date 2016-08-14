@@ -1,6 +1,6 @@
 {
     "name": "appserver",
-    "description": "This instance will run a python appserver",
+    "description": "This instance will run an nginx loadbalancer",
     "chef_type": "role",
     "json_class": "Chef::Role",
     "default_attributes": {

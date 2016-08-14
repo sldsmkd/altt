@@ -1,22 +1,24 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+host_port = 8000
+
 servers=[
   {
     :hostname => "web1",
-    :ip => "10.0.2.15",
+    :ip => "192.168.179.10",
     :ssh_port => "10222",
     :role => "appserver"
   },
   {
     :hostname => "web2",
-    :ip => "10.0.2.16",
+    :ip => "192.168.179.11",
     :ssh_port => "10223",
     :role => "appserver"
   },
   {
     :hostname => "lb1",
-    :ip => "10.0.2.18",
+    :ip => "192.168.179.12",
     :role => "loadbalancer",
     :ssh_port => "10224"
   }
@@ -45,6 +47,9 @@ Vagrant.configure("2") do |config|
         chef.roles_path = "roles"
         chef.add_role "default"
         chef.add_role machine[:role]
+        if machine[:role] == "loadbalancer" then
+          node.vm.network "forwarded_port", guest: 80, host: host_port
+        end
       end
       node.vm.provision "shell",
         inline: "curl --fail --location http://127.0.0.1/index.html; echo $?"
