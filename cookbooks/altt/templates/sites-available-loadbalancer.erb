@@ -1,0 +1,12 @@
+upstream application {
+  server 10.0.2.15;
+  server 10.0.2.16;
+}
+
+server {
+  access_log  /var/log/nginx/localhost.access.log;
+  listen 80;
+  location / {
+    proxy_pass http://application;
+  }
+}

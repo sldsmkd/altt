@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: altt
-# Recipe:: hello
+# Recipe:: application
 #
 chef_gem 'chef-rewind'
 require 'chef/rewind'
@@ -31,7 +31,7 @@ supervisor_service "hello" do
 end
 
 rewind :template => "/etc/nginx/sites-available/default" do
-  source "sites-available-hello.erb"
+  source "sites-available-application.erb"
   cookbook_name "altt"
   notifies :reload, "service[nginx]", :delayed
 end

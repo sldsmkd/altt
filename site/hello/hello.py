@@ -6,7 +6,7 @@ def getip():
     """ quick hack to get IP address, only tested on Ubuntu """
     try:
         regex = "(inet addr:)(.+)( Bcast)"
-        network = subprocess.check_output(['/sbin/ifconfig', 'eth0'])
+        network = subprocess.check_output(['/sbin/ifconfig', 'eth1'])
         matches = re.search(regex, network)
         ip = matches.group(2)
     except:

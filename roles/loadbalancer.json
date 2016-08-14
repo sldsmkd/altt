@@ -11,6 +11,6 @@
         }
     },
     "run_list": [
-        "recipe[altt::application]"
+        "recipe[altt::loadbalancer]"
     ]
 }
