@@ -1,0 +1,32 @@
+{
+  "name": "uwsgi",
+  "description": "Installs/Configures uWSGI",
+  "long_description": "Description\n===========\n\nOpscode Chef cookbook that installs and configures uWSGI.\nuWSGI is a fast, self-healing and developer/sysadmin-friendly application container server coded in pure C.\n\nRequirements\n============\n\nPlatform\n--------\n* Debian, Ubuntu\n\nCookbooks\n---------\n* python\n* runit\n\nDefinitions\n==========\n\n`uwsgi_service`\n\n-  `:home_path`         - path to the app you want to run with uWSGI, default to `\"/var/www/app\"`\n-  `:pid_path`          - path to pid file for uWSGI, default to `\"/var/run/uwsgi-app.pid\"`\n-  `:config_file`       - path to configuration file, default to `nil`, overrides the below options if not `nil`\n-  `:config_type`       - configuration file type, default to `:ini`\n-  `:host`              - hostname to run uWSGI on, default to `\"127.0.0.1\"`\n-  `:port`              - port number to run uWSGI on, default to `8080`\n-  `:worker_processes`  - number of uWSGI workers, default to `2`, should probably be relative to the number of CPUs\n-  `:app`               - app to run on uwsgi, passed to --module parameted of uWSGI, default to `\"main:app\"`\n-  `:uid`               - user-id to run uwsgi under, default to `\"www-data\"`\n-  `:gid`               - group-id to run uwsgi under, default to `\"www-data\"`\n-  `:master`            - enable uwsgi master process, default to `false`\n-  `:no_orphans`        - kill workers without a master process, default to `false`\n-  `:die_on_term`       - make uwsgi die on term signal, default to `false`\n-  `:close_on_exec`     - set close-on-exec flag on uwsgi socket, default to `false`\n-  `:lazy`              - load application after worker fork(), default to `false`\n-  `:disable_logging`   - disable uwsgi request logging, default to `false`\n-  `:start_immediately` - decide whether you want to start the service immediately or later manually, default to `true`\n\nUsage\n=====\n\nAdd the default uWSGI recipe to install uwsgi through pip.\nDefine a uWSGI service with a definition like so:\n\n```ruby\nuwsgi_service \"myapp\" do\n  home_path \"/var/www/app\"\n  pid_path \"/var/run/uwsgi-app.pid\"\n  host \"127.0.0.1\"\n  port 8080\n  worker_processes 2\n  app \"flask:app\"\nend\n```\n\nYou can also use a preexisting uWSGI configuration like so:\n\n```ruby\nuwsgi_service \"myapp\" do\n  home_path \"/var/www/app\"\n  pid_path \"/var/run/uwsgi-app.pid\"\n  config_file \"/etc/uwsgi/myapp.yaml\"\n  config_type :yaml\nend\n```\n\nIf `:config_file` is passed, all other options except `:home_path`, `:pid_path`, and `:config_type` are ignored.\n",
+  "maintainer": "50onRed",
+  "maintainer_email": "dev@50onred.com",
+  "license": "MIT",
+  "platforms": {
+  },
+  "dependencies": {
+    "python": ">= 0.0.0",
+    "runit": ">= 0.0.0",
+    "conffile": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.1.2"
+}

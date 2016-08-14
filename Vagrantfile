@@ -75,6 +75,7 @@ Vagrant.configure("2") do |config|
     chef.nodes_path = "nodes"
     chef.roles_path = "roles"
     chef.add_recipe "altt_nginx"
+    chef.add_recipe "vim"
   end
 
   config.vm.provision "shell",
