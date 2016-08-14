@@ -5,3 +5,6 @@ license 'all_rights'
 description 'Installs/Configures altt_nginx'
 long_description 'Installs/Configures altt_nginx'
 version '0.1.0'
+
+depends 'nginx', '2.7.6'
+depends 'uwsgi', '0.1.2'
