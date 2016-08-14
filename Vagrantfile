@@ -70,6 +70,7 @@ Vagrant.configure("2") do |config|
   #SHELL
 
   config.vm.provision "chef_zero" do |chef|
+    chef.version = "12.10.24"
     chef.cookbooks_path = "cookbooks"
     chef.data_bags_path = "data_bags"
     chef.nodes_path = "nodes"
