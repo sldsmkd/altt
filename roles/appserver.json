@@ -6,9 +6,11 @@
     "default_attributes": {
     },
     "override_attributes": {
+        "nginx": {
+            "default_root": "/vagrant/site"
+        }
     },
     "run_list": [
-        "recipe[altt_nginx]",
-        "recipe[uwsgi]"
+        "recipe[altt::hello]"
     ]
 }
