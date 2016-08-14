@@ -1,0 +1,7 @@
+name 'altt_nginx'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures altt_nginx'
+long_description 'Installs/Configures altt_nginx'
+version '0.1.0'
