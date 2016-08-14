@@ -1,0 +1,21 @@
+{
+    "name": "default",
+    "description": "This instance will have managed sudo + vim",
+    "chef_type": "role",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+        "authorization": {
+            "sudo": {
+                "groups": ["admin"],
+                "users": ["vagrant"],
+                "passwordless": true
+            }
+        }
+    },
+    "override_attributes": {
+    },
+    "run_list": [
+        "recipe[vim]",
+        "recipe[sudo]"
+    ]
+}
