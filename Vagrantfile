@@ -1,8 +1,4 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 host_port = 8000
-
 servers=[
   {
     :hostname => "web1",
@@ -17,22 +13,21 @@ servers=[
     :role => "appserver"
   },
   {
-    :hostname => "lb1",
+    :hostname => "lb",
     :ip => "192.168.179.12",
     :role => "loadbalancer",
     :ssh_port => "10224"
   }
 ]
 
-Vagrant.configure("2") do |config|
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+webs = []
+servers.each do |host|
+  if host[:hostname] != "lb"
+    webs << host[:ip]
+  end
+end
 
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  # config.vm.network "private_network", ip: "192.168.33.10"
+Vagrant.configure("2") do |config|
   servers.each do |machine|
     config.vm.define machine[:hostname] do |node|
       node.vm.box = "puppetlabs/ubuntu-14.04-64-nocm"
@@ -45,6 +40,9 @@ Vagrant.configure("2") do |config|
         chef.data_bags_path = "data_bags"
         chef.nodes_path = "nodes"
         chef.roles_path = "roles"
+        chef.json = {
+          "webs" => webs
+        }
         chef.add_role "default"
         chef.add_role machine[:role]
         if machine[:role] == "loadbalancer" then

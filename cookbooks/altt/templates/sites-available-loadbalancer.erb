@@ -1,6 +1,6 @@
 upstream application {
-  server 192.168.179.10;
-  server 192.168.179.11;
+  server <%= node[:webs][0] %>;
+  server <%= node[:webs][1] %>;
 }
 
 server {
