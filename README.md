@@ -2,10 +2,10 @@
 
 ## Key Directories & Files
 
-site/
-roles/
-cookbooks/altt
-Vagrantfile
+site/ - the artifacts for the website
+roles/ - chef definitions for differing roles
+cookbooks/altt - wrapper cookbook with configuration overrides
+Vagrantfile - for provisioning
 
 ## Usage
 
@@ -49,9 +49,5 @@ __Added an application recipe that install supervisord to lifecycle manage uwsgi
 __Config was defined upfront in an Array, then iterators were used to provision each instance.__
 
 * Test (in an automated fashion) that both app servers are working, and that the nginx is serving the content correctly.
-
-## Limitations
-
-* The Load Balancer is hard coded with the IP addresses predefined in the Vagrantfile, if you need to change these then edit cookbooks/altt/recipes/loadbalancer.rb
 
 
