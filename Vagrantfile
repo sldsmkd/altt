@@ -35,7 +35,6 @@ Vagrant.configure("2") do |config|
       node.vm.hostname = machine[:hostname]
       node.vm.network :forwarded_port, guest: 22, host: machine[:ssh_port], id: "ssh"
       node.vm.provision "chef_zero" do |chef|
-        chef.version = "12.10.24"
         chef.cookbooks_path = "cookbooks"
         chef.data_bags_path = "data_bags"
         chef.nodes_path = "nodes"
