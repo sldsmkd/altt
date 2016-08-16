@@ -49,8 +49,7 @@ Vagrant.configure("2") do |config|
           node.vm.network "forwarded_port", guest: 80, host: host_port
         end
       end
-      node.vm.provision "shell",
-        inline: "curl --fail --location http://127.0.0.1/index.html; echo $?"
+      node.vm.provision "shell", path: "tests/systemcheck.py"
     end
   end
 end

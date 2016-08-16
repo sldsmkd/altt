@@ -1,28 +1,14 @@
-import re
-import subprocess
-
-
-def getip():
-    """ quick hack to get IP address, only tested on Ubuntu """
-    try:
-        regex = "(inet addr:)(.+)( Bcast)"
-        network = subprocess.check_output(['/sbin/ifconfig', 'eth1'])
-        matches = re.search(regex, network)
-        ip = matches.group(2)
-    except:
-        ip = "Unknown"
-    finally:
-        return  ip.strip()
+import platform
 
 
 def response():
     """ generate a simple hello world page """
     filename = "/vagrant/site/hello/template.html"
     template = open(filename).readlines()
-    ip = getip()
+    hostname = platform.node()
     response = ""
     for line in template:
-        response = response + line.replace("$IP", ip)
+        response = response + line.replace("$HOSTNAME", hostname)
     return response
 
 

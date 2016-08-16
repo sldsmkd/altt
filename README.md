@@ -2,23 +2,24 @@
 
 ## Key Directories & Files
 
-site/ - the artifacts for the website
-roles/ - chef definitions for differing roles
-cookbooks/altt - wrapper cookbook with configuration overrides
-Vagrantfile - for provisioning
+* site/ - the artifacts for the website
+* roles/ - chef definitions for differing roles
+* cookbooks/altt - wrapper cookbook with configuration overrides
+* Vagrantfile - for provisioning
 
 ## Usage
 
 * vagrant up
-* Edit Vagrantfile if there are network clashes, config is all defined in an array at the start
+* connect to Load Balancer at http://localhost:8000/
+* Edit Vagrantfile if there are network clashes, config is in an array at the start
 
 ## Requirements
 
 * Create a Vagrantfile that creates a single machine using this box:https://vagrantcloud.com/puppetlabs/boxes/ubuntu-14.04-64-nocm and installs the latest released version of your chosen configuration management tool.
 
-__Done, learning experience here in that Vagrant manages the installation of the Config Management. Selected Chef-Zero as it emulates the behaviour of a full Chef Install without the Server. There's a bunch of hacks you have to do with Chef-Solo to achieve the same behavior.__
+__Done, learning experience here in that Vagrant manages the installation of the Config Management. Selected Chef-Zero as it emulates the behaviour of a full Chef Install without the Server.__
 
-__The dependency tree was sorted out by using Berkshelf, it's pulled in some random stuff that we don't use but that is fine.__
+__The dependency tree was sorted out by using Berkshelf, it's pulled in some extra cookbooks that we don't use but that is fine.__
 
 * Install the nginx webserver via configuration management.
 
@@ -26,7 +27,7 @@ __This is pretty easy, I prefer to use the wrapper/decorator pattern with upstre
 
 * Run a simple test using Vagrant's shell provisioner to ensure that nginx is listening on port 80
 
-__Simple curl command, it's not driving the Vagrant logic but it could.__
+__Simple python script, checks URL multiple times, and counts varying responses, returns number of servers in service__
 
 * Again, using configuration management, update contents of /etc/sudoers file so that Vagrant user can sudo without a password and that anyone in the admin group can sudo with a password.
 
@@ -38,7 +39,7 @@ __Chef usually manages this okay, by sending notifications to the service to rel
 
 * Create a simple "Hello World" web application in your favourite language of choice.
 
-__Quick Python / WSGI script, extends the simple HTML created earlier and injects the server IP via the magic of regex.__
+__Quick Python / WSGI script, extends the simple HTML created earlier and injects the server hostname.__
 
 * Ensure your web application is available via the nginx instance.
 
@@ -50,4 +51,5 @@ __Config was defined upfront in an Array, then iterators were used to provision 
 
 * Test (in an automated fashion) that both app servers are working, and that the nginx is serving the content correctly.
 
+__Ideally I'd tool something here with Test Kitchen and ServerSpec, but didn't have enough time. Python script used instead__
 
